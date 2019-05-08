@@ -104,6 +104,9 @@ func (r *DistanceMatrixRequest) params() url.Values {
 	if r.TransitRoutingPreference != "" {
 		q.Set("transit_routing_preference", string(r.TransitRoutingPreference))
 	}
+	if r.QuotaUser != "" {
+		q.Set("quotaUser", r.QuotaUser)
+	}
 	return q
 }
 
@@ -149,6 +152,8 @@ type DistanceMatrixRequest struct {
 	// values are `TransitRoutingPreferenceLessWalking` and
 	// `TransitRoutingPreferenceFewerTransfers`. Optional.
 	TransitRoutingPreference TransitRoutingPreference
+	// QuotaUser prevents individual users from using up your API quota, limit the number of requests per second per user for an API.
+	QuotaUser string
 }
 
 // DistanceMatrixResponse represents a Distance Matrix API response.

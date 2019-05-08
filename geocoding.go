@@ -118,7 +118,9 @@ func (r *GeocodingRequest) params() url.Values {
 	if r.Language != "" {
 		q.Set("language", r.Language)
 	}
-
+	if r.QuotaUser != "" {
+		q.Set("quotaUser", r.QuotaUser)
+	}
 	return q
 }
 
@@ -179,6 +181,8 @@ type GeocodingRequest struct {
 	// Use with caution. For more detail on why this is required, please see
 	// https://googlegeodevelopers.blogspot.com/2016/11/address-geocoding-in-google-maps-apis.html
 	Custom url.Values
+	// QuotaUser prevents individual users from using up your API quota, limit the number of requests per second per user for an API.
+	QuotaUser string
 }
 
 // GeocodingResult is a single geocoded address

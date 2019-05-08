@@ -430,6 +430,8 @@ type PlaceDetailsRequest struct {
 	// two-character value. Most ccTLD codes are identical to ISO 3166-1 codes, with
 	// some exceptions. This parameter will only influence, not fully restrict, results.
 	Region string
+	// QuotaUser prevents individual users from using up your API quota, limit the number of requests per second per user for an API.
+	QuotaUser string
 }
 
 // PlaceDetailsResult is an individual Places API Place Details result
@@ -746,7 +748,9 @@ func (r *PlaceAutocompleteRequest) params() url.Values {
 	if len(cf) > 0 {
 		q.Set("components", strings.Join(cf, "|"))
 	}
-
+	if r.QuotaUser != "" {
+		q.Set("quotaUser", r.QuotaUser)
+	}
 	return q
 }
 
@@ -789,6 +793,8 @@ type PlaceAutocompleteRequest struct {
 	// SessionToken is a token that means you will get charged by autocomplete session
 	// instead of by character for Autocomplete
 	SessionToken PlaceAutocompleteSessionToken
+	// QuotaUser prevents individual users from using up your API quota, limit the number of requests per second per user for an API.
+	QuotaUser string
 }
 
 var placesPhotoAPI = &apiConfig{

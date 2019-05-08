@@ -125,6 +125,9 @@ func (r *DirectionsRequest) params() url.Values {
 	if r.TrafficModel != "" {
 		q.Set("traffic_model", string(r.TrafficModel))
 	}
+	if r.QuotaUser != "" {
+		q.Set("quotaUser", r.QuotaUser)
+	}
 	return q
 }
 
@@ -173,6 +176,8 @@ type DirectionsRequest struct {
 	// TrafficModel specifies traffic prediction model when requesting future
 	// directions. Optional.
 	TrafficModel TrafficModel
+	// QuotaUser prevents individual users from using up your API quota, limit the number of requests per second per user for an API.
+	QuotaUser string
 }
 
 // GeocodedWaypoint represents the geocoded point for origin, supplied waypoints, or
